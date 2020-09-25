@@ -1,11 +1,15 @@
 function ConvertCtoF(degreesCelsius) {
     let cInput = document.getElementById("CInput").value;
-
+    let text;
 
     if (cInput == "") {
         // preventDefault();
         console.log("Celcius text box is empty")
-    } else {
+    } else if (isNaN(cInput)) {
+        text = cInput + " is not a number";
+        document.getElementById("ErrDiv").innerHTML = text;
+    }
+    else {
         degreesCelsius = cInput;
         let cTemp = (cInput * (9 / 5)) + 32;
         document.getElementById("FInput").value = cTemp;
@@ -17,12 +21,18 @@ function ConvertCtoF(degreesCelsius) {
 
 function ConvertFtoC(degreesFahrenheit) {
     let fInput = document.getElementById("FInput").value;
-    degreesFahrenheit = fInput;
+    // degreesFahrenheit = fInput;
+    let text;
 
     if (fInput == "") {
         // preventDefault();
         console.log("Fahrenheit text box is empty")
-    } else {
+    } else if (isNaN(fInput)) {
+        text = fInput + " is not a number";
+        document.getElementById("ErrDiv").innerHTML = text;
+    }
+    else {
+        degreesFahrenheit = fInput;
         let fTemp = ((fInput - 32) * 5 / 9);
         document.getElementById("CInput").value = fTemp;
         //adding line below to see if numbers will print in one text box at a time
@@ -36,9 +46,8 @@ function ConvertFtoC(degreesFahrenheit) {
 function fahrenheitImg() {
     let fTemp = document.getElementById("FInput").value;
     if (fTemp == "") {
-        //adding the preventDefault stops the cold image from appearing when convert button
-        //is clicked when nothing is in either text box
-        preventDefault();
+        //adding the preventDefault stops the cold image from appearing when convert button is clicked when nothing is in either text box?
+        // preventDefault();
     }
     else if (fTemp < 32) {
         //display cold image
@@ -58,39 +67,19 @@ function fahrenheitImg() {
 
 }
 
-// ERROR MESSAGE
-function fahrenheitErrorMessage() {
-    let fahrenheit = document.getElementById("FInput").value;
-    let text;
-
-    if (isNaN(fahrenheit)) {
-        text = fahrenheit + " is not a number";
-    }
-    else {
-        //with this change err div is coming up "undefined" instead of string in textbox
-        text = "";
-    };
-
-    document.getElementById("ErrDiv").innerHTML = text;
-    // return text;
-}
-function celciusErrorMessage() {
-    //this is still taking the input from FInput, just returning NaN
-    let celcius = document.getElementById("CInput").value;
-    let text;
-
-    if (isNaN(celcius)) {
-        text = celcius + " is not a number";
-    }
-    else {
-        //with this change err div is coming up "undefined" instead of string in textbox
-        text = "";
-    };
-
-    document.getElementById("ErrDiv").innerHTML = text;
-    // return text;
-}
-
+//Clearing opposing input field
+// function clearField() {
+//     let cInput = document.getElementById("CInput").value;
+//     let fInput = document.getElementById("FInput").value;
+//     // if CInput text box has some value, then clear FInput text box
+//     if (cInput != "") {
+//         fInput = ""
+//  // if FInput text box has some value, clear CInput text box
+//     } else if (fInput != "") {
+//         cInput = ""
+//     };
+// }
+// Not sure how to force the other text box to clear using onfocus or oninput; no obvious method to clear a field without reseting form or deleting all input values
 
 function bodyLoaded() {
     // Your code here
@@ -102,11 +91,8 @@ function bodyLoaded() {
     //this will hear the click and diplay the correct image
     document.getElementById("ConvertButton").addEventListener("click", fahrenheitImg);
 
-    //Error message if input is NaN
-    document.getElementById("ConvertButton").addEventListener("click", celciusErrorMessage);
-    document.getElementById("ConvertButton").addEventListener("click", fahrenheitErrorMessage);
-
-
+    //Clear opposite field 
+    // document.getElementById("ConvertButton").addEventListener("click", clearField);
 
     //this hides all of the images until I want them to be displayed
     document.getElementById("coldImage").style.visibility = "hidden";
