@@ -69,21 +69,34 @@ function fahrenheitImg() {
 }
 
 //Clearing opposing input field
-function clearInput() {
-    let cInput = document.getElementById("CInput").value;
+function clearFahrenheit() {
+    let cInput = document.getElementById("CInput");
 
-    let fInput = document.getElementById("FInput").value;
+    let fInput = document.getElementById("FInput");
+    if (cInput = cInput.value) {
+        fInput.value = ""
+    };
 
 
     // THIS WORKS, KIND OF! Not what assignment calls for though; CLEAR vs DISABLE
-    if (cInput) {
-        document.getElementById("FInput").disabled = true;
-    }
-    else if (fInput) {
-        document.getElementById("CInput").disabled = true;
-    }
+    // if (cInput) {
+    //     document.getElementById("FInput").disabled = true;
+    // }
+    // else if (fInput) {
+    //     document.getElementById("CInput").disabled = true;
+    // }
 }
 
+function clearCelcius() {
+    let cInput = document.getElementById("CInput");
+
+    let fInput = document.getElementById("FInput");
+
+    if (fInput = fInput.value) {
+        cInput.value = ""
+    };
+
+}
 
 function bodyLoaded() {
     // Your code here
@@ -96,8 +109,8 @@ function bodyLoaded() {
     document.getElementById("ConvertButton").addEventListener("click", fahrenheitImg);
 
     //Clear opposite field 
-    document.getElementById("CInput").addEventListener("input", clearInput);
-    document.getElementById("FInput").addEventListener("input", clearInput);
+    document.getElementById("CInput").addEventListener("input", clearFahrenheit);
+    document.getElementById("FInput").addEventListener("input", clearCelcius);
 
     //this hides all of the images until I want them to be displayed
     document.getElementById("coldImage").style.visibility = "hidden";
