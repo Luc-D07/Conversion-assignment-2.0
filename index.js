@@ -37,7 +37,8 @@ function ConvertFtoC(degreesFahrenheit) {
         document.getElementById("CInput").value = fTemp;
         //adding line below to see if numbers will print in one text box at a time
         //only works here not in the above function
-        document.getElementById("CInput").value = "";
+        //removing line below allows us to see input in celcius text box
+        // document.getElementById("CInput").value = "";
         return fTemp;
     };
 }
@@ -68,18 +69,21 @@ function fahrenheitImg() {
 }
 
 //Clearing opposing input field
-// function clearField() {
-//     let cInput = document.getElementById("CInput").value;
-//     let fInput = document.getElementById("FInput").value;
-//     // if CInput text box has some value, then clear FInput text box
-//     if (cInput != "") {
-//         fInput = ""
-//  // if FInput text box has some value, clear CInput text box
-//     } else if (fInput != "") {
-//         cInput = ""
-//     };
-// }
-// Not sure how to force the other text box to clear using onfocus or oninput; no obvious method to clear a field without reseting form or deleting all input values
+function clearInput() {
+    let cInput = document.getElementById("CInput").value;
+
+    let fInput = document.getElementById("FInput").value;
+
+
+    // THIS WORKS, KIND OF! Not what assignment calls for though; CLEAR vs DISABLE
+    if (cInput) {
+        document.getElementById("FInput").disabled = true;
+    }
+    else if (fInput) {
+        document.getElementById("CInput").disabled = true;
+    }
+}
+
 
 function bodyLoaded() {
     // Your code here
@@ -92,7 +96,8 @@ function bodyLoaded() {
     document.getElementById("ConvertButton").addEventListener("click", fahrenheitImg);
 
     //Clear opposite field 
-    // document.getElementById("ConvertButton").addEventListener("click", clearField);
+    document.getElementById("CInput").addEventListener("input", clearInput);
+    document.getElementById("FInput").addEventListener("input", clearInput);
 
     //this hides all of the images until I want them to be displayed
     document.getElementById("coldImage").style.visibility = "hidden";
